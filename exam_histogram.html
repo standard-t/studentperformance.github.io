@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Score Histogram</title>
+  <style>
+    body { font-family: sans-serif; }
+    .bar { fill: steelblue; }
+    .bar:hover { fill: orange; }
+    .axis text { font-size: 12px; }
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      padding: 6px;
+      background: lightgray;
+      border: 1px solid #666;
+      pointer-events: none;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Exam Score Distribution</h2>
+
+  <!-- Gender Filter -->
+  <label for="gender-select">Filter by Gender:</label>
+  <select id="gender-select">
+    <option value="All">All</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <!-- Bin slider -->
+  <br>
+  <label for="bin-slider">Number of Bins: <span id="bin-count">20</span></label>
+  <input type="range" id="bin-slider" min="5" max="50" value="20">
+
+  <!-- Chart container -->
+  <svg width="800" height="450"></svg>
+
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="exam_histogram.js"></script>
+</body>
+
+</html>

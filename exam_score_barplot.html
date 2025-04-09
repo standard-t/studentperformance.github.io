@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.8.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-299eadd4f802faae6bd7cdb5d906854b"}, "mark": {"type": "bar"}, "encoding": {"color": {"field": "School_Type", "title": "School Type", "type": "nominal"}, "column": {"field": "School_Type", "title": null, "type": "nominal"}, "tooltip": [{"field": "Learning_Disabilities", "title": "Disability", "type": "nominal"}, {"field": "School_Type", "title": "School", "type": "nominal"}, {"field": "Exam_Score", "title": "Avg Score", "type": "quantitative"}], "x": {"field": "Learning_Disabilities", "title": "Learning Disabilities", "type": "nominal"}, "y": {"field": "Exam_Score", "title": "Average Exam Score", "type": "quantitative"}}, "height": 300, "title": {"text": "Avg Exam Score by Learning Disabilities and School Type", "anchor": "start", "dy": -10, "fontSize": 16}, "width": 250, "$schema": "https://vega.github.io/schema/vega-lite/v5.8.0.json", "datasets": {"data-299eadd4f802faae6bd7cdb5d906854b": [{"Learning_Disabilities": "No", "School_Type": "Private", "Exam_Score": 67.41156840934372}, {"Learning_Disabilities": "No", "School_Type": "Public", "Exam_Score": 67.3218279047156}, {"Learning_Disabilities": "Yes", "School_Type": "Private", "Exam_Score": 66.23222748815166}, {"Learning_Disabilities": "Yes", "School_Type": "Public", "Exam_Score": 66.28719008264463}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
