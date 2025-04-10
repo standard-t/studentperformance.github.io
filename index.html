@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Analysis - DS4200 Final Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .visualization {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .nav-pills .nav-link {
+            color: #2c3e50;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #2c3e50;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .usage-instruction {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .encoding-info {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Student Performance Analysis</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#motivation">Motivation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#data">Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#visualizations">Visualizations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#conclusions">Conclusions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <section id="motivation" class="section">
+            <h2>Project Motivation</h2>
+            <p class="lead">
+                In today's educational landscape, understanding the factors that influence student academic performance is crucial
+                for developing effective teaching strategies and support systems. Our analysis focuses on exploring the complex
+                relationships between various factors affecting student achievement.
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Research Questions</h3>
+                    <ul>
+                        <li>How do learning disabilities impact student performance across different school types?</li>
+                        <li>What is the relationship between student motivation and academic outcomes?</li>
+                        <li>How effective are current support systems for different student groups?</li>
+                        <li>What role does school type play in student achievement?</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Significance</h3>
+                    <ul>
+                        <li>Help educators identify at-risk students early</li>
+                        <li>Improve support system effectiveness</li>
+                        <li>Guide resource allocation in schools</li>
+                        <li>Inform educational policy decisions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="data" class="section">
+            <h2>Data Overview</h2>
+            <p>Our analysis uses the Student Performance Factors dataset, which includes comprehensive information about student demographics, academic performance, and support systems.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Dataset Characteristics:</h3>
+                    <ul>
+                        <li>Sample Size: 6,609 students</li>
+                        <li>Time Period: 2023-2024 Academic Year</li>
+                        <li>Source: StudentPerformanceFactors.csv</li>
+                        <li>Format: Structured CSV data</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Key Variables:</h3>
+                    <ul>
+                        <li>Exam Scores (Continuous, 0-100)</li>
+                        <li>School Type (Categorical: Public/Private)</li>
+                        <li>Learning Disabilities Status (Binary)</li>
+                        <li>Gender (Categorical)</li>
+                        <li>Support Systems (Multiple Categories)</li>
+                        <li>Motivation Levels (Ordinal Scale)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualizations" class="section">
+            <h2>Interactive Visualizations</h2>
+            
+            <div class="visualization">
+                <h3>1. Exam Score Distribution by Gender and School Type</h3>
+                <div class="encoding-info">
+                    <strong>Visual Encodings:</strong>
+                    <ul>
+                        <li>X-axis: Exam scores (quantitative)</li>
+                        <li>Y-axis: Frequency count (quantitative)</li>
+                        <li>Color: Gender distinction (categorical)</li>
+                        <li>Bins: Adjustable grouping of scores</li>
+                    </ul>
+                </div>
+                <div class="usage-instruction">
+                    <strong>Interactive Features:</strong>
+                    <ul>
+                        <li>Use the gender filter dropdown to view distributions by gender</li>
+                        <li>Adjust the bin slider to change histogram granularity</li>
+                        <li>Hover over bars for detailed frequency information</li>
+                    </ul>
+                </div>
+                <iframe src="exam_histogram.html"></iframe>
+            </div>
+
+            <div class="visualization">
+                <h3>2. Learning Disabilities Impact Analysis</h3>
+                <div class="encoding-info">
+                    <strong>Visual Encodings:</strong>
+                    <ul>
+                        <li>X-axis: Learning disability status (categorical)</li>
+                        <li>Y-axis: Average exam score (quantitative)</li>
+                        <li>Color: School type (categorical)</li>
+                        <li>Column grouping: School comparison</li>
+                    </ul>
+                </div>
+                <div class="usage-instruction">
+                    <strong>Interactive Features:</strong>
+                    <ul>
+                        <li>Hover over bars to see exact average scores</li>
+                        <li>Compare across school types and disability status</li>
+                        <li>Tooltip shows detailed breakdowns</li>
+                    </ul>
+                </div>
+                <iframe src="exam_score_barplot.html"></iframe>
+            </div>
+
+            <div class="visualization">
+                <h3>3. Support Systems Distribution and Effectiveness</h3>
+                <div class="encoding-info">
+                    <strong>Visual Encodings:</strong>
+                    <ul>
+                        <li>Distribution of support types</li>
+                        <li>Color intensity: Effectiveness level</li>
+                        <li>Size: Number of students</li>
+                    </ul>
+                </div>
+                <div class="usage-instruction">
+                    <strong>Interactive Features:</strong>
+                    <ul>
+                        <li>Click to filter by support type</li>
+                        <li>Hover for detailed statistics</li>
+                        <li>Compare effectiveness across groups</li>
+                    </ul>
+                </div>
+                <iframe src="SupportDistributions.html"></iframe>
+            </div>
+
+            <div class="visualization">
+                <h3>4. Motivation and Academic Performance Correlation</h3>
+                <div class="encoding-info">
+                    <strong>Visual Encodings:</strong>
+                    <ul>
+                        <li>X-axis: Motivation levels</li>
+                        <li>Y-axis: Academic performance</li>
+                        <li>Color: School type</li>
+                        <li>Size: Student count</li>
+                    </ul>
+                </div>
+                <div class="usage-instruction">
+                    <strong>Interactive Features:</strong>
+                    <ul>
+                        <li>Filter by school type</li>
+                        <li>Zoom to explore specific regions</li>
+                        <li>Hover for detailed student information</li>
+                    </ul>
+                </div>
+                <iframe src="ScoreAndMotivation.html"></iframe>
+            </div>
+
+            <div class="visualization">
+                <h3>5. Multi-factor Performance Analysis</h3>
+                <div class="encoding-info">
+                    <strong>Visual Encodings:</strong>
+                    <ul>
+                        <li>Multiple coordinated views</li>
+                        <li>Color-coded categories</li>
+                        <li>Size represents significance</li>
+                    </ul>
+                </div>
+                <div class="usage-instruction">
+                    <strong>Interactive Features:</strong>
+                    <ul>
+                        <li>Select variables for comparison</li>
+                        <li>Link and brush across views</li>
+                        <li>Dynamic filtering options</li>
+                    </ul>
+                </div>
+                <iframe src="Scatterplots.html"></iframe>
+            </div>
+        </section>
+
+        <section id="conclusions" class="section">
+            <h2>Conclusions and Future Work</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Key Findings</h3>
+                    <ul>
+                        <li>Learning disabilities have a consistent impact across school types, suggesting similar support effectiveness</li>
+                        <li>Strong positive correlation between student motivation and academic performance</li>
+                        <li>Support systems show varying effectiveness for different student groups</li>
+                        <li>School type influences performance but effect size varies by student characteristics</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Future Research Directions</h3>
+                    <ul>
+                        <li>Longitudinal study tracking changes over multiple academic years</li>
+                        <li>Integration of socioeconomic factors and family background data</li>
+                        <li>Development of predictive models for early intervention</li>
+                        <li>Detailed analysis of support system effectiveness by student subgroups</li>
+                        <li>Investigation of interaction effects between multiple factors</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-3">
+            <p class="mb-0 text-center">DS4200: Information Visualization - Final Project</p>
+            <p class="mb-0 text-center">Team Members: Noah Chen, Vedant Gupta, Tara Standard</p>
+            <p class="mb-0 text-center">Spring 2024 - Northeastern University</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
