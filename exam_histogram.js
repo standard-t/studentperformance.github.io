@@ -12,7 +12,6 @@ const tooltip = d3.select("body").append("div")
 
 let allData, x, y, scoreExtent;
 
-// Load and prepare the data
 d3.csv("exam_histogram_data.csv").then(data => {
   data.forEach(d => {
     d.Exam_Score = +d.Exam_Score;
@@ -24,7 +23,7 @@ d3.csv("exam_histogram_data.csv").then(data => {
   x = d3.scaleLinear().domain(scoreExtent).range([0, width]);
   y = d3.scaleLinear().range([height, 0]);
 
-  updateHistogram("All", 20); // default gender & bins
+  updateHistogram("All", 20);
 
   d3.select("#gender-select").on("change", function () {
     const gender = d3.select(this).property("value");
@@ -39,6 +38,22 @@ d3.csv("exam_histogram_data.csv").then(data => {
     updateHistogram(gender, binCount);
   });
 });
+
+// Kernel density estimator
+function kernelDensityEstimator(kernel, X) {
+  return function (V) {
+    return X.map(function (x) {
+      return [x, d3.mean(V, v => kernel(x - v))];
+    });
+  };
+}
+
+function kernelEpanechnikov(k) {
+  return function (v) {
+    v = v / k;
+    return Math.abs(v) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+  };
+}
 
 function updateHistogram(gender, binCount) {
   let data = allData;
@@ -57,6 +72,7 @@ function updateHistogram(gender, binCount) {
 
   chart.selectAll("*").remove();
 
+  // Axes
   chart.append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x));
@@ -64,6 +80,7 @@ function updateHistogram(gender, binCount) {
   chart.append("g")
     .call(d3.axisLeft(y));
 
+  // Bars
   chart.selectAll(".bar")
     .data(bins)
     .enter().append("rect")
@@ -82,6 +99,29 @@ function updateHistogram(gender, binCount) {
       tooltip.transition().duration(200).style("opacity", 0);
     });
 
+  // KDE line
+  const kdeX = d3.range(scoreExtent[0], scoreExtent[1], 0.5);
+  const kde = kernelDensityEstimator(kernelEpanechnikov(2), kdeX);
+  const density = kde(scores);
+
+  const maxDensity = d3.max(density, d => d[1]);
+  const densityScale = d3.scaleLinear()
+    .domain([0, maxDensity])
+    .range([height, 0]);
+
+  const line = d3.line()
+    .curve(d3.curveBasis)
+    .x(d => x(d[0]))
+    .y(d => densityScale(d[1]));
+
+  chart.append("path")
+    .datum(density)
+    .attr("fill", "none")
+    .attr("stroke", "#56ebd3")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+  // Axis labels
   chart.append("text")
     .attr("x", width / 2)
     .attr("y", height + margin.bottom - 5)
