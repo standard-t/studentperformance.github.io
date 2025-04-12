@@ -117,7 +117,7 @@ function updateHistogram(gender, binCount) {
   chart.append("path")
     .datum(density)
     .attr("fill", "none")
-    .attr("stroke", "#56ebd3")
+    .attr("stroke", "#79bc55")
     .attr("stroke-width", 2)
     .attr("d", line);
 
